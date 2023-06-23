@@ -1,0 +1,118 @@
+@font-face {
+    font-family: 'Better Together Caps';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Better Together Caps'), url('fonts/Better\ Together\ Caps.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'Ovsyanka';
+    src:url('./fonts/Ovsyanka-press.woff ') format('woff');
+}
+
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+}
+
+body{
+    background-image: none;
+    background-size: cover;
+}
+
+#cart-menu {
+    width: 120px;
+    height: 48px;
+    transition: all 0.2s ease-in-out;
+}
+
+#cart-menu:hover {
+    transform: scale(1.2);
+}
+
+
+
+
+/* Меню начало */
+
+
+.menu{
+    margin-top: 165px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+.menu h3{
+    font-size: 40px;
+    font-weight: 700;
+    margin-top: 10px;
+    font-family: 'Ovsyanka', sans-serif;
+    color: #54372A;
+    /* font-style: normal; */
+    font-weight: 400;
+    font-size: 48px;
+    line-height: 48px;
+    
+}
+
+.menu_category {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 64px;
+/* brown/900 */
+}
+
+.menu_category > div:not(:last-child) {
+    margin-right: 32px;
+
+  }
+
+.menu_category h4{
+    font-family: 'Better Together Caps';
+    text-align: center;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 40px;
+
+    /* brown/900 */
+
+    color: #54372A;
+}
+
+.heading1 {
+    text-align: center;
+    margin-bottom: 0px;
+}
+
+
+
+
+
+/* Конец меню */
+
+/* Продукты начало */
+.product1 {
+    height: 3070px;
+    padding-left: 280px;
+    padding-right: 280px;
+    margin-bottom: 0;
+    margin-top: 80px;
+    background-image: url(./pictures/backgraund1.png);
+    background-position: center calc(50% + 170px); /* задаем позицию по центру и сдвигаем на 50 пикселей вниз от центра */
+    background-size: 1430px 1000px; /* задаем желаемые значения ширины и высоты */
+    background-repeat: no-repeat; /* запрещаем повторять фоновое изображение */
+}
+
+/* Продукты конец */
