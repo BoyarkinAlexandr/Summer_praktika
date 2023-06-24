@@ -2,12 +2,12 @@
     font-family: 'Better Together Caps';
     font-style: normal;
     font-weight: normal;
-    src: url('./fonts/Better\ Together\ Caps.woff') format('woff');
+    src: url('/public/css/fonts/Better\ Together\ Caps.woff') format('woff');
 }
 
 @font-face {
     font-family: 'Ovsyanka';
-    src:url('./fonts/Ovsyanka-press.woff ') format('woff');
+    src:url('/public/css/fonts/WOFF-Ovsynka/Ovsyanka-press.woff ') format('woff');
 }
 
 
@@ -104,9 +104,9 @@ body{
 
 /* Продукты начало */
 .product1 {
-    height: 3070px;
-    padding-left: 280px;
-    padding-right: 280px;
+    display: flex;
+    flex-direction: column;
+    padding-bottom: 80px;
     margin-bottom: 0;
     margin-top: 80px;
     background-image: url(./pictures/backgraund1.png);

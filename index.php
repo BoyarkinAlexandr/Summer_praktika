@@ -9,7 +9,6 @@
     include_once('./connections/view.php');
 
 
-    $dir = __DIR__;
     session_start();
     if(!isset($_COOKIE['id_session'])){
         $_SESSION['id_session'] = uniqid();
@@ -20,9 +19,8 @@
         $_SESSION['id_session'] = $_COOKIE['id_session'];
     }
 
-    $url = $_GET['q'] ?? 'main';
-    $segment = explode('/', $url);
-    $controll_name = ucfirst(array_shift($segment)) . 'Controller';
+    $segment = $SPLIT[0] ?? 'main';
+    $controll_name = ucfirst($segment) . 'Controller';
     if(class_exists($controll_name)){
         $controller = new $controll_name();
         $controller->Action();

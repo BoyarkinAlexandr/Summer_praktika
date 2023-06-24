@@ -5,9 +5,9 @@
         <div class="col">
         <h1>Навигация</h1>
         <ul>
-            <li><a href="#">Главная</a></li>
-            <li><a href="#">Меню</a></li>
-            <li><a href="#">Помощь</a></li>
+            <li><a href="/main">Главная</a></li>
+            <li><a href="/menu">Меню</a></li>
+            <li><a href="/help">Помощь</a></li>
         </ul>
         </div>
         <div class="col">

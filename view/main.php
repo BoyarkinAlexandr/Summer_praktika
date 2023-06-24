@@ -40,7 +40,7 @@
                 богатым выбором ароматных напитков, свежих зерен и 
                 вкусных десертов и закусок. Приходите и откройте для 
                 себя настоящий кофейный рай.</p>
-            <button id="btn">Открыть меню</button>
+            <button id="btn"><a href="/menu">Открыть меню</a></button>
         </div>
         <div class="img">
             <img src="/public/css/pictures/coffee_mas.png" alt="">
