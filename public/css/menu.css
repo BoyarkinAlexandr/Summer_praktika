@@ -2,7 +2,7 @@
     font-family: 'Better Together Caps';
     font-style: normal;
     font-weight: normal;
-    src: local('Better Together Caps'), url('fonts/Better\ Together\ Caps.woff') format('woff');
+    src: url('./fonts/Better\ Together\ Caps.woff') format('woff');
 }
 
 @font-face {

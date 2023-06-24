@@ -2,12 +2,12 @@
     font-family: 'Better Together Caps';
     font-style: normal;
     font-weight: normal;
-    src: local('Better Together Caps'), url('fonts/Better\ Together\ Caps.woff') format('woff');
+    src: local('Better Together Caps'), url('/public/css/fonts/Better\ Together\ Caps.woff') format('woff');
 }
 
 @font-face {
     font-family: 'Ovsyanka';
-    src:url('./fonts/Ovsyanka-press.woff ') format('woff');
+    src:url('/public/css/fonts/WOFF-Ovsynka/Ovsyanka-press.woff ') format('woff');
 }
 
 
@@ -843,6 +843,17 @@ color: #251813;
 
 /* Конец футера */
 
+
+.main__container__error{
+  background: url('/public/css/pictures/error_cat.png');
+  display: flex;
+  justify-content: center;
+}
+
+.big__text__error{
+  font-size: 32px;
+  color: red;
+}
 
 
 /* Логин */

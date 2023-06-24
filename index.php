@@ -20,7 +20,7 @@
         $_SESSION['id_session'] = $_COOKIE['id_session'];
     }
 
-    $url = $_GET['url'] ?? 'main';
+    $url = $_GET['q'] ?? 'main';
     $segment = explode('/', $url);
     $controll_name = ucfirst(array_shift($segment)) . 'Controller';
     if(class_exists($controll_name)){

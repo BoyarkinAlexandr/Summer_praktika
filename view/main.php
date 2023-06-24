@@ -14,20 +14,20 @@
     </nav> -->
 
     <nav>
-        <div class="container">
-        <div class="logo-search-container">
-            <p class="logo__title">Fragrante</p>
-            <div class="search-bar">
-            <input type="search" placeholder="ПОИСК">
+        <div class="container-fluid">
+            <div class="logo-search-container">
+                <p class="logo__title">Fragrante</p>
+                <div class="search-bar">
+                <input type="search" placeholder="ПОИСК">
+                </div>
             </div>
-        </div>
-        <div class="button">
-            <a href="#">
-                <img id="cart-icon" src="/public/css/pictures/shopping_cart.png" alt="корзина"">
-            </a>
-            <button class="btn_log">Войти</button>
-            <button class="btn_reg">Зарегистрироваться</button>
-        </div>
+            <div class="button">
+                <a href="#">
+                    <img id="cart-icon" src="/public/css/pictures/shopping_cart.png" alt="корзина"">
+                </a>
+                <button class="btn_log">Войти</button>
+                <button class="btn_reg">Зарегистрироваться</button>
+            </div>
         </div>
     </nav>
 
@@ -40,7 +40,7 @@
                 богатым выбором ароматных напитков, свежих зерен и 
                 вкусных десертов и закусок. Приходите и откройте для 
                 себя настоящий кофейный рай.</p>
-            <button id="btn">Order Now</button>
+            <button id="btn">Открыть меню</button>
         </div>
         <div class="img">
             <img src="/public/css/pictures/coffee_mas.png" alt="">
