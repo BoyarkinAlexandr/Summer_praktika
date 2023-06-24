@@ -13,6 +13,9 @@ class MainController{
         $product1 = $this->productModel->getProductsWithLimitPeriod(1,3);
         $product2 = $this->productModel->getProductsWithLimitPeriod(3,6);
         $view = './view/main.php';
+        // $countProd = $this->productModel->getCountProducts();
+        // $countRow = ceil($countProd / 3);
+
         $data = array(
             'products1' => $product1,
             'products2' => $product2,

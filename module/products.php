@@ -55,4 +55,13 @@
                 
             } catch (PDOException $e) {echo $e->getMessage();}
         }
+
+        public function getCountProducts(){
+            try {
+                $query = $this->db->query("
+                SELECT COUNT(*) 
+                FROM `product`");
+                return (int)$query->fetchAll(PDO::FETCH_BOTH)[0][0];
+            } catch (PDOException $e) {echo $e->getMessage();}
+        }
     }
