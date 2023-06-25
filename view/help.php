@@ -109,9 +109,9 @@
         </div>
         
         <div style="text-align: center;">
-            <a href="index.html"><button type="button" class="btn custom-color">Главная</button></a>
+            <a href="/main"><button type="button" class="btn custom-color">Главная</button></a>
             <span class="spacer"></span>
-            <a href="menu.html"><button type="button" class="btn custom-color">Меню</button></a>
+            <a href="/menu"><button type="button" class="btn custom-color">Меню</button></a>
         </div>
 
 

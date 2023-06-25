@@ -22,15 +22,29 @@
                 </div>
             </div>
             <div class="button">
-                <a href="#">
+                <div href="#">
                     <img id="cart-icon" src="/public/css/pictures/shopping_cart.png" alt="корзина"">
-                </a>
+                </div>
                 <button class="btn_log">Войти</button>
                 <button class="btn_reg">Зарегистрироваться</button>
             </div>
         </div>
     </nav>
 
+    <!-- Начало корзина -->
+    <div class="cart__container">
+        <div class="cart__filter"></div>
+        <div class="cart__wrapper">
+            <div class="cart__title">
+                <h2 class="cart__title__text">Ваши покупки</h2>
+            </div>
+            <div class="cart__products">
+
+            </div>
+            <div class="cart__buy__btn">Купить</div>
+        </div>
+    </div>
+    <!-- Конец корзина -->
 <!-- home section start -->
     <section class="home" id="home">
         <div class="home-content">
@@ -94,13 +108,13 @@
                 <p>Наша команда прилагает много сил для создания качественных кофе и выпечки. В каждом нашем<br> продукте вы можете почуствовать частичку вложенной нами любви.</p>
             </div>
             
+            <?php while(ceil(count($products)/3)):?>
             <div class="product-row">
-                <?php foreach($products1 as $product):?>
+                <?php foreach(array_slice($products, 0, 3) as $product):?>
                 <div class="product-card">
-                    <div class="badge">
-                        <a href="#">
-                            <img src="/public/css/pictures/izbranoe.png" alt="Нажми меня">
-                        </a>
+                    <div class="badge <?php echo $product['favourites'] == '' ? '' : 'active'?>" data-id-product="<?php $product['id_product']?>">
+                        <img src="/public/css/pictures/favorietes.svg" class="like" alt="Нажми меня">
+                        <img src="/public/css/pictures/success.svg" class="success" alt="Нажми меня">
                     </div>
 		            <div class="product-tumb">
                         <img src="<?= $product['img_product']?>" alt="">
@@ -113,133 +127,17 @@
                                 <small><?= $product['price_product']?>₽</small>
                             </div>
 
-                            <div class="product-links">
-                                <a href=""><ion-icon name="bag-outline"></ion-icon></a>
+                            <div class="product-links" >
+                                <div href=""><ion-icon name="bag-outline" data-id-product="<?php $product['id_product']?>"></ion-icon></div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <?php endforeach;?>
+                <?php 
+                    array_shift($products);
+                    endforeach;?>
             </div>
-            <div class="product-row">
-                <?php foreach($products2 as $product):?>
-                <div class="product-card">
-                    <div class="badge">
-                        <a href="#">
-                            <img src="/public/css/pictures/izbranoe.png" alt="Нажми меня">
-                        </a>
-                    </div>
-		            <div class="product-tumb">
-                        <img src="<?= $product['img_product']?>" alt="">
-                    </div>
-
-                    <div class="product-details">
-                        <h4><?= $product['name_product']?></h4>
-                        <div class="product-bottom-details">
-                            <div class="product-price">
-                                <small><?= $product['price_product']?>₽</small>
-                            </div>
-
-                            <div class="product-links">
-                                <a href=""><ion-icon name="bag-outline"></ion-icon></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <?php endforeach;?>
-            </div>
-
-
-            <!-- ______________________ -->
-
-            <!-- <div class="product-row">
-                <div class="product-card">
-                    <div class="badge">
-                        <a href="#">
-                            <img src="./icons/izbranoe.png" alt="Нажми меня">
-                        </a>
-                    </div>
-		            <div class="product-tumb">
-                        <img src="./pictures/kruasan.png" alt="">
-                    </div>
-
-                    <div class="product-details">
-                        <div class="product-cat">
-                            <span class="product-catagory">3 типа</span>
-                        </div>
-                        <h4>Croissant</h4>
-                        <div class="product-bottom-details">
-                            <div class="product-price">
-                                <small>200₽</small>
-                            </div>
-
-                            <div class="product-links">
-                                <a href=""><ion-icon name="bag-outline"></ion-icon></a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="product-card">
-                    <div class="badge">
-                        <a href="#">
-                            <img src="./icons/izbranoe.png" alt="Нажми меня">
-                        </a>
-                    </div>
-		            <div class="product-tumb">
-                        <img src="./pictures/cold brue.png" alt="">
-                    </div>
-
-                    <div class="product-details">
-                        <div class="product-cat">
-                            <span class="product-catagory">3 типа</span>
-                        </div>
-                        <h4>cold brew</h4>
-                        <div class="product-bottom-details">
-                            <div class="product-price">
-                                <small>200₽</small>
-                            </div>
-
-                            <div class="product-links">
-                                <a href=""><ion-icon name="bag-outline"></ion-icon></a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="product-card">
-                    <div class="badge">
-                        <a href="#">
-                            <img src="./icons/izbranoe.png" alt="Нажми меня">
-                        </a>
-                    </div>
-		            <div class="product-tumb">
-                        <img src="./pictures/latte.png" alt="">
-                    </div>
-
-                    <div class="product-details">
-                        <div class="product-cat">
-                            <span class="product-catagory">3 типа</span>
-                        </div>
-                        <h4>latte</h4>
-                        <div class="product-bottom-details">
-                            <div class="product-price">
-                                <small>350₽</small>
-                            </div>
-
-                            <div class="product-links">
-                                <a href=""><ion-icon name="bag-outline"></ion-icon></a>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-
-            </div> -->
+            <?php endwhile;?>
         </div>
     </section>
 <!-- Популярные позиции конец -->

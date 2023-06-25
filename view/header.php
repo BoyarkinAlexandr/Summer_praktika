@@ -51,7 +51,7 @@
         if (SPLIT()[0] == 'help'){ 
             echo'<link rel="stylesheet" type="text/css" href="/public/css/FAQ.css">';
         };?>
-
+    <script src="/public/js/jquery-3.7.0.min.js"></script>
 </head>
 <body>
 <?php ?>

@@ -38,6 +38,16 @@
             }
         }
 
+        public function getClientId($idSession){
+            $command = $this->db->prepare('
+                SELECT id_client
+                FROM clients
+                WHERE id_session=:sessionID');
+            $command->bindParam(':sessionID', $idSession);
+            $command->execute();
+            return $command->fetchColumn();
+        }
+
     }
 
 ?>
