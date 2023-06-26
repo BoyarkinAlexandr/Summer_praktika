@@ -33,6 +33,7 @@
 <!-- Конец футера -->
 
     <script src="/public/js/app.js"></script>
+    <script src="/public/js/cart.js"></script>
 </body>
 </html>
 <?php ?>
