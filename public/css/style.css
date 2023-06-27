@@ -435,6 +435,7 @@ nav .button {
     box-shadow: 0 2px 7px #8b3d3d;
     margin: 10px 0;
     background: #FFFFFF;
+    position: relative;
 }
 
 
@@ -465,6 +466,7 @@ nav .button {
     border-radius: 50% !important;
     width: 30px;
     height: 30px;
+    cursor: pointer;
 }
 
 .badge img {

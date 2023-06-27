@@ -3,4 +3,5 @@
     include_once('./controller/MainController.php');
     include_once('./controller/MenuController.php');
     include_once('./controller/HelpController.php');
+    include_once('./controller/PostController.php');
 ?>

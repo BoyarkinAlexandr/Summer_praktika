@@ -28,5 +28,10 @@
         $errorController = new ErrorController();
         $errorController->Action();
     }
+
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $controller = new PostController();
+        $controller->handleRequest($_POST);
+      }
     
 ?>

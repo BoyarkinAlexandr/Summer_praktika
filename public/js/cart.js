@@ -3,16 +3,20 @@ $(document).ready(() => {
         constructor(btn, block){
             this.block = block;
             this.mode = false;
-            this.block.css({
-                'right': '-100vw',
-                'display': 'block',
-            });
+            this.btn = btn;
+            this.btn.on('click', () => {
+                this.triger();
+            })
         }
 
-        functionOpen(){
-            this.block.animate(() => {
-
-            }, 500);
+        triger(){
+            if (this.mode){
+                this.block.hide(500);
+                this.mode = !this.mode;
+            } else {
+                this.block.show(500);
+                this.mode = !this.mode;
+            }
         }
 
     }
