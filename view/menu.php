@@ -1,32 +1,3 @@
-<nav>
-        <div class="container-fluid">
-        <div class="logo-search-container">
-            <p class="logo__title">Fragrante</p>
-            <div class="search-bar">
-            <input type="search" placeholder="ПОИСК">
-            </div>
-        </div>
-        <div class="button">
-            <a href="#">
-                <img id="cart-menu" src="/public/css/pictures/menu.svg" alt="корзина"">
-            </a>
-
-            <a href="#">
-                <img id="cart-icon" src="/public/css/pictures/izbranoe.svg" alt="корзина"">
-            </a>
-
-            <a href="#">
-                <img id="cart-icon" src="/public/css/pictures/shop_card.svg" alt="корзина"">
-            </a>
-
-            <a href="#">
-                <img id="cart-icon" src="/public/css/pictures/profile.svg" alt="корзина"">
-            </a>
-        </div>
-        </div>
-    </nav>
-
-
 
     <!-- Начало меню -->
 
