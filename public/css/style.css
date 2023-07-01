@@ -436,6 +436,7 @@ nav .button {
     margin: 10px 0;
     background: #FFFFFF;
     position: relative;
+    user-select: none;
 }
 
 
@@ -467,6 +468,8 @@ nav .button {
     width: 30px;
     height: 30px;
     cursor: pointer;
+    transition-property: background-color;
+    transition-duration: .2s;
 }
 
 .badge img {

@@ -19,6 +19,15 @@
         $_SESSION['id_session'] = $_COOKIE['id_session'];
     }
 
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+        $controller = new PostController();
+        $JSON = $controller->handleRequest($_POST);
+        echo $JSON;
+        exit();
+    }
+
+    
+
     $segment = $SPLIT[0] ?? 'main';
     $controll_name = ucfirst($segment) . 'Controller';
     if(class_exists($controll_name)){
@@ -28,10 +37,5 @@
         $errorController = new ErrorController();
         $errorController->Action();
     }
-
-    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        $controller = new PostController();
-        $controller->handleRequest($_POST);
-      }
     
 ?>
