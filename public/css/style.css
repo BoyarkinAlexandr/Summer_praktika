@@ -610,6 +610,7 @@ color: #251813;
     text-align: center;
     border-radius: 50%;
     border: 10px solid #F97316;
+    cursor: pointer;
     background-color: #F97316; /* добавляем оранжевый цвет внутренней области рамки */
 }
 
@@ -1161,6 +1162,7 @@ color: #251813;
   width: 30px;
   height: 30px;
   margin-right: 20px;
+  cursor: pointer;
 }
 
 .cart__products__favourites > img {
@@ -1566,5 +1568,228 @@ footer a {
 .menu__market__icon.on{
   padding: 15px 0;
   border-bottom: 2px solid #F97316
+}
+
+
+.favorietes__container{
+  position: fixed;
+  z-index: 100;
+  display: none;
+}
+.favorietes__filter{
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, .4);
+  z-index: 150;
+}
+
+.favorietes__wrapper{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  position:fixed;
+  width: 30%;
+  background-color: #FEF3C7;
+  box-shadow: -2px 0px 2px rgba(0,0,0,.2);
+  box-sizing: border-box;
+  padding: 15px 10px;
+  right: 0;
+  height: 90vh;
+  z-index: 150;
+}
+
+.favorietes__title{
+  border-bottom: 1px solid rgba(85, 56, 43, .5);
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.favorietes__title__text{
+  color: #F97316;
+  font-size: 28px;
+  font-weight: 700;
+  margin-top: 10px;
+  font-family: 'Ovsyanka', sans-serif;
+  /* font-style: normal; */
+  font-weight: 400;
+  line-height: 48px;
+}
+
+.favorietes__buy__btn{
+  font-family: 'Montserrat', sans-serif;
+  display: inline-block;
+  padding: 0.6rem 2rem;
+  font-weight: 500;
+  border-radius: .9rem;
+  width: max-content;
+  cursor: pointer;
+  color: #FEF3C7;
+  background-color: #F97316;
+  transition: all 300ms ease;
+}
+
+.favorietes__products{
+  margin-bottom: 20px;
+}
+
+.favorietes__price{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  margin-bottom: 15px;
+  padding-bottom: 5px;
+  border-bottom: 1px solid rgba(85, 56, 43, .5);
+}
+
+.favorietes__price__number{
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 10px;
+  font-family: 'Ovsyanka', sans-serif;
+  font-weight: 400;
+  margin-right: 20px;
+}
+
+.favorietes__price__number > span {
+  text-align: right;
+  font-family: inherit;
+}
+
+.favorietes__price__text{
+  font-size: 18px;
+  font-weight: 700;
+  margin-top: 10px;
+  font-family: 'Ovsyanka', sans-serif;
+  font-weight: 400;
+}
+
+.favorietes__products__favourites{
+  width: 30px;
+  height: 30px;
+  margin-right: 20px;
+  cursor: pointer;
+}
+
+.favorietes__products__favourites > img {
+  width: 100%;
+  height: 100%;
+  
+  
+  filter: brightness(0) saturate(100%) invert(54%) sepia(83%) saturate(2637%) hue-rotate(351deg) brightness(99%) contrast(98%);
+}
+
+.favorietes__products__favourites:not(.active) > .favorietes__products__love-fill{
+  display: none;
+}
+
+.favorietes__products__favourites.active > .favorietes__products__love{
+  display: none;
+}
+
+.favorietes__products{
+  display: flex;
+  background-color: #FFF;
+  box-shadow:  0 2px 7px #8b3d3d;
+  border-radius: .9rem;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 10px 5px 10px 10px
+}
+
+.favorietes__products__wrapper{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 84%;
+}
+
+.favorietes__products__icon{
+  width: 40px;
+  height: 40px;
+  margin-right: 15px;
+}
+
+.favorietes__products__icon > img {
+  width: 100%;
+  height: 100%;
+}
+
+.favorietes__products__name > h2{
+  font-size: 14px;
+  font-weight: 700;
+  margin-top: 10px;
+  font-family: 'Ovsyanka', sans-serif;
+  font-weight: 400;
+}
+
+.favorietes__products__name{
+  margin-right: 20px;
+}
+
+.favorietes__products__count{
+  margin-right: 70px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.favorietes__products__count__min{
+  font-size: 18px;
+  font-weight: 700;
+  font-family: 'Ovsyanka', sans-serif;
+  font-weight: 400;
+  margin-right: 15px;
+  user-select: none;
+  cursor: pointer;
+}
+
+.favorietes__products__count__num{
+  font-size: 18px;
+  font-weight: 700;
+  font-family: 'Ovsyanka', sans-serif;
+  font-weight: 400;
+}
+
+.favorietes__products__count__plus{
+  font-size: 18px;
+  font-weight: 700;
+  font-family: 'Ovsyanka', sans-serif;
+  font-weight: 400;
+  user-select: none;
+  cursor: pointer;
+}
+
+.favorietes__products__count__num > input{
+  width: min-content;
+}
+
+.favorietes__products__price__text{
+  font-size: 18px;
+  font-weight: 700;
+  font-family: 'Ovsyanka', sans-serif;
+  font-weight: 400;
+}
+
+.favorietes__products__price{
+  font-size: 18px;
+  font-weight: 700;
+  font-family: 'Ovsyanka', sans-serif;
+  font-weight: 400;
+}
+
+.favorietes__products__count__num >  input::-webkit-outer-spin-button,
+.favorietes__products__count__num >  input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+.favorietes__products__container{
+  width: 100%;
 }
 

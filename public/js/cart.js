@@ -21,4 +21,5 @@ $(document).ready(() => {
 
     }
     new AnimationOpenJQ($('#cart-icon-card'),$('.cart__container'));
+    new AnimationOpenJQ($('#cart-icon-favorietes'),$('.favorietes__container'));
 });
