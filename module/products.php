@@ -41,21 +41,7 @@
                 return (int)$query->fetchAll(PDO::FETCH_BOTH)[0][0];
             } catch (PDOException $e) {echo $e->getMessage();}
         }
-
-        public function getFavouritesProduct($clientId){
-            try{
-                $command= $this->db->query("
-                SELECT *
-                FROM `favourites`
-                WHERE 'id_client'=:clientId
-                ");
-                $command->bindParam(':clientId', $clientId);
-                $command->execute();
-                return $command->fetchAll(PDO::FETCH_ASSOC);
-                
-            } catch (PDOException $e) {echo $e->getMessage();}
-        }
-
+        
         public function getInitParamFavorietes($products, $favorietesProducts){
             if (!empty($favorietesProducts)) {
                 foreach ($products as &$product) {
@@ -79,4 +65,6 @@
 
             return $products;
         }
+
+
     }

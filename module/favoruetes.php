@@ -1,7 +1,4 @@
 <?php
-
-use function PHPSTORM_META\type;
-
     class FavouritesModel extends Model{
         public function __construct()
         {
@@ -14,7 +11,7 @@ use function PHPSTORM_META\type;
                 SELECT `id_product`
                 FROM `favourites`
                 WHERE `id_client`=:idClient
-                ORDER BY id_product DESC
+                ORDER BY id_product
                 ");
                 $command->bindParam(':idClient', $idClient);
                 $command->execute();
@@ -47,6 +44,25 @@ use function PHPSTORM_META\type;
             if ($command->execute()){
                 return array('result' => true, 'action' => 'delete');
             } 
+        }
+
+        public function getFavofProducts($idClient){
+            try{
+                $arrayProductsId = $this->getAllFavourites($idClient);
+                $placeholders = implode(',', array_fill(0, count($arrayProductsId), '?'));
+                $command = $this->db->prepare('
+                    SELECT * 
+                    FROM `product` 
+                    WHERE `id_product` IN ('. $placeholders  .')
+                ');
+                $values = array_column($arrayProductsId, 'id_product');
+                $command->execute($values);
+                if ($command->execute()){
+                    return $command->fetchAll(PDO::FETCH_ASSOC);
+                } 
+            } catch(PDOException $e){
+                return array();
+            }
         }
 
     }

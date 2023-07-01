@@ -16,12 +16,20 @@
                     switch($POSTarray['action']){
                         case 'add_favourites':{
                             $userId = $this->clientModel->getClientId($_SESSION['id_session']);
-                            return json_encode($this->favoritModel->addToFavorietes($userId ,$POSTarray['id_product']));
+                            $object = array(
+                                'result_query' => $this->favoritModel->addToFavorietes($userId ,$POSTarray['id_product']),
+                                'objects_products' => $this->favoritModel->getFavofProducts($userId),
+                            );
+                            return json_encode($object);
                             exit();
                         }
                         case 'delete_favourites':{
                             $userId = $this->clientModel->getClientId($_SESSION['id_session']);
-                            return json_encode($this->favoritModel->deleteToFavorietes($userId ,$POSTarray['id_product']));
+                            $object = array(
+                                'result_query' => $this->favoritModel->deleteToFavorietes($userId ,$POSTarray['id_product']),
+                                'objects_products' => $this->favoritModel->getFavofProducts($userId),
+                            );
+                            return json_encode($object);
                             exit();
                         }
                     }

@@ -33,59 +33,35 @@
 
     <section class="product1">
         <div class="product-container">
-        <div class="product-row">
-            <?php foreach($products1 as $product):?>
-            <div class="product-card">
-                <div class="badge">
-                    <a href="#">
-                        <img src="/public/css/pictures/izbranoe.png" alt="Нажми меня">
-                    </a>
-                </div>
-                <div class="product-tumb">
-                    <img src="<?= $product['img_product']?>" alt="">
-                </div>
+        <?php while(ceil(count($products)/3)):?>
+            <div class="product-row">
+                <?php foreach(array_slice($products, 0, 3) as $product):?>
+                <div class="product-card">
+                    <div class="badge <?php echo $product['favourites'] == '' ? '' : 'active'?>" data-id-product="<?php echo $product['id_product']?>">
+                        <img src="/public/css/pictures/favorietes.svg" class="like" alt="Нажми меня">
+                        <img src="/public/css/pictures/success.svg" class="success" alt="Нажми меня">
+                    </div>
+		            <div class="product-tumb">
+                        <img src="<?= $product['img_product']?>" alt="">
+                    </div>
 
-                <div class="product-details">
-                    <h4><?= $product['name_product']?></h4>
-                    <div class="product-bottom-details">
-                        <div class="product-price">
-                            <small><?= $product['price_product']?>₽</small>
-                        </div>
+                    <div class="product-details">
+                        <h4><?= $product['name_product']?></h4>
+                        <div class="product-bottom-details">
+                            <div class="product-price">
+                                <small><?= $product['price_product']?>₽</small>
+                            </div>
 
-                        <div class="product-links">
-                            <a href=""><ion-icon name="bag-outline"></ion-icon></a>
+                            <div class="product-links" >
+                                <div href=""><ion-icon name="bag-outline" data-id-product="<?php $product['id_product']?>"></ion-icon></div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <?php 
+                    array_shift($products);
+                    endforeach;?>
             </div>
-            <?php endforeach;?>
-        </div>
-        <div class="product-row">
-            <?php foreach($products2 as $product):?>
-            <div class="product-card">
-                <div class="badge">
-                    <a href="#">
-                        <img src="/public/css/pictures/izbranoe.png" alt="Нажми меня">
-                    </a>
-                </div>
-                <div class="product-tumb">
-                    <img src="<?= $product['img_product']?>" alt="">
-                </div>
-
-                <div class="product-details">
-                    <h4><?= $product['name_product']?></h4>
-                    <div class="product-bottom-details">
-                        <div class="product-price">
-                            <small><?= $product['price_product']?>₽</small>
-                        </div>
-
-                        <div class="product-links">
-                            <a href=""><ion-icon name="bag-outline"></ion-icon></a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <?php endforeach;?>
-            </div>
+        <?php endwhile;?>
         </div>
     </section>
