@@ -50,6 +50,14 @@
                             return json_encode($object);
                             exit();
                         }
+
+                        case 'delete_all':{
+                            $userId = $_SESSION['id_client'];
+                            $this->cartModel->deleteAllProduct($userId);
+                            $object = $this->productModel->getAllProducts($userId);
+                            return json_encode($object);
+                            exit();
+                        }
                     }
                 }
             }

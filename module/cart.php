@@ -56,5 +56,17 @@
                 return $command->fetchColumn();
             } 
         }
+
+        public function deleteAllProduct($idUser){
+            $command = $this->db->prepare('
+                DELETE FROM cart
+                WHERE id_client = :idUser
+            ');
+            $command->bindParam(':idUser', $idUser);
+            if($command->execute()){
+                return true;
+            } 
+            return false;
+        }
     }
 ?>

@@ -25,4 +25,16 @@ $(document).ready(() => {
     new AnimationOpenJQ($('#cart-icon-favorietes'),$('.favorietes__container'));
 
     addToCart(document.querySelectorAll('.product-links > div'),'.product-links > div');
+
+    $('.cart__reset__btn').on('click', function(){
+        let data = {'action': 'delete_all'};
+        newAjaxQuery('index.php', data, 'POST')
+            .then(function(responce){
+                responce = $.parseJSON(responce);
+                refreshContainerCart($('.cart__products__container'),responce);
+                refreshContainerFavor($('.favorietes__products__container'), responce);
+                refreshBtnIconFromDelete($('.product-links > div'));
+                addToCart(document.querySelectorAll('.product-links > div'),'.product-links > div');
+            })
+    });
 });

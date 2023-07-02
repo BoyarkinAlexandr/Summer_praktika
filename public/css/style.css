@@ -1802,3 +1802,23 @@ footer a {
   width: 100%;
 }
 
+.cart__btn__container{
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.cart__reset__btn{
+  margin-left: 20px;
+  font-family: 'Montserrat', sans-serif;
+  display: inline-block;
+  padding: 0.6rem 2rem;
+  font-weight: 500;
+  border-radius: .9rem;
+  width: max-content;
+  cursor: pointer;
+  color: #030201;
+  background-color: #f3f7f3f2;
+  border: 1px solid #030201;
+  transition: all 300ms ease;
+}

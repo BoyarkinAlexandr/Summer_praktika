@@ -159,3 +159,12 @@ function addToFavourites(block){
             })
     });
 }
+
+function refreshBtnIconFromDelete(btnBlocks){
+    let ShopBtn = document.createElement('div');
+    ShopBtn.insertAdjacentHTML('beforeend','<ion-icon name="bag-outline" data-id-product="" role="img" class="md hydrated"></ion-icon>');
+    for (let i = 0; i < btnBlocks.length; i++){
+        ShopBtn.setAttribute('data-id-product', $(btnBlocks[i]).data('id-product')); 
+        btnBlocks[i].outerHTML = ShopBtn.outerHTML;
+    }
+}

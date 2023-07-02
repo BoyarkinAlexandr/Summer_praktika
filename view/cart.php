@@ -41,8 +41,10 @@
                 <div class="cart__price__text">Итого</div>
                 <div class="cart__price__number"><span>750</span>&#8381;</div>
             </div>
-
-            <div class="cart__buy__btn">Купить</div>
+            <div class="cart__btn__container">
+                <div class="cart__buy__btn">Купить</div>
+                <div class="cart__reset__btn">Очистить корзину</div>
+            </div>
         </div>
     </div>
     <!-- Конец корзина -->
