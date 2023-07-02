@@ -14,12 +14,50 @@ function newAjaxQuery(url, data, method){
     });
 }
 
+function addToCart(blocks, selectorBlocks){
+    blocks.forEach(block => {
+        $(block).on('click', function(){
+            let thisBtn = $(selectorBlocks + `[data-id-product=${$(this).data('id-product')}]`);
+            thisBtn.css({'padding': '8px 19px', 'font-size': '20px', 'color': '#f3f7f2', 'font-family':'Better Together Caps'});
+            let thisValue = $(block).text() ?  Number($(block).text()) + 1 : 1;
+            let action = thisValue === 1 ? `add_cart` : `update_cart`;
+            let data = {
+                'action': action,
+                'id_product': $(block).data('id-product'),
+                'count_product': thisValue,
+            }
+            newAjaxQuery('index.php',data, 'POST')
+                .then(function(responce){
+                    responce = $.parseJSON(responce);
+                    thisBtn.text(thisValue);
+                    $(`.product-links > div[data-id-product=${thisBtn.data('id-product')}]`).text(responce.count_product);
+                    $(`.cart__products__count__num > input[data-id-product=${thisBtn.data('id-product')}]`).val(responce.count_product);
+                    refreshContainerCart($('.cart__products__container'),responce);
+                })
+                .catch(function(xhr, status, error){
+                    console.log(xhr);
+                })
+        });
+    });
+}
+
 function refreshContainerFavor(container, arrayInfo){
     container.empty();
+    let btns = [];
     arrayInfo.forEach(infoBlock => {
         if(infoBlock['is_favourites']){
-            console.log(infoBlock['count_product']);
-            let btnAddToCart = `<div style="${!infoBlock['count_product'] ? '' : "padding: 8px 19px; font-size: 20px; color: #f3f7f2; font-family:Better Together Caps"}" data-id-product="${infoBlock['id_product']}">${ !infoBlock['count_product'] ? '<ion-icon name="bag-outline" data-id-product="" role="img" class="md hydrated"></ion-icon>' : infoBlock['count_product']}</div>`;
+            let ShopBtn = document.createElement('div');
+            if(!infoBlock['count_product']){
+                ShopBtn.insertAdjacentHTML('beforeend','<ion-icon name="bag-outline" data-id-product="" role="img" class="md hydrated"></ion-icon>');
+                ShopBtn.setAttribute('data-id-product', infoBlock['id_product']);
+            } else {
+                ShopBtn.style.padding = '8px 19px';
+                ShopBtn.style.fontFamily = 'Better Together Caps';
+                ShopBtn.style.fontSize = '20px';
+                ShopBtn.style.color = "#f3f7f2";
+                ShopBtn.setAttribute('data-id-product', infoBlock['id_product']);
+                ShopBtn.innerText = infoBlock['count_product'];
+            }
             let totalHTML = 
             `<div class="favorietes__products">
                 <div class="favorietes__products__wrapper">
@@ -30,13 +68,15 @@ function refreshContainerFavor(container, arrayInfo){
                         <h2>${infoBlock['name_product']}</h2>
                     </div>
                     <div class="product-links">
-                        ${btnAddToCart}
+                        ${ShopBtn.outerHTML}
                     </div>
                 </div>
             </div>`;
-            addToCart([btnAddToCart], '.product-links > div');
             container.append(totalHTML);
+            btns.push(ShopBtn);
         }
+        $('.product-links > div').off();
+        addToCart(document.querySelectorAll('.product-links > div'), '.product-links > div');
     })
 }
 
@@ -67,39 +107,9 @@ function refreshContainerCart(container, arrayInfo){
                     </div>
                 </div>
             </div>`;
-            // addToCart([btnAddToCart], '.product-links > div');
             container.append(totalHTML);
         }
     })
-}
-
-function addToCart(blocks, selectorBlocks){
-    console.log(selectorBlocks + `[data-id-product=${$(this).data('id-product')}]`);
-    blocks.forEach(block => {
-        $(block).on('click', function(){
-            let thisBtn = $(selectorBlocks + `[data-id-product=${$(this).data('id-product')}]`);
-            thisBtn.css({'padding': '8px 19px', 'font-size': '20px', 'color': '#f3f7f2', 'font-family':'Better Together Caps'});
-            let thisValue = $(block).text() ?  Number($(block).text()) + 1 : 1;
-            let action = thisValue === 1 ? `add_cart` : `update_cart`;
-            console.log(action);
-            let data = {
-                'action': action,
-                'id_product': $(block).data('id-product'),
-                'count_product': thisValue,
-            }
-            newAjaxQuery('index.php',data, 'POST')
-                .then(function(responce){
-                    responce = $.parseJSON(responce);
-                    thisBtn.text(thisValue);
-                    $(`.product-links > div[data-id-product=${thisBtn.data('id-product')}]`).text(responce.count_product);
-                    $(`.cart__products__count__num > input[data-id-product=${thisBtn.data('id-product')}]`).val(responce.count_product);
-                    refreshContainerCart($('.cart__products__container'),responce);
-                })
-                .catch(function(xhr, status, error){
-                    console.log(xhr);
-                })
-        });
-    });
 }
 
 function addToFavourites(block){

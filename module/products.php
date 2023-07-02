@@ -10,8 +10,8 @@
             $command = $this->db->prepare('
                 SELECT COALESCE(cart.count_product, NULL) AS count_product, product.*, COALESCE(favourites.id_product, NULL) AS is_favourites
                 FROM product
-                LEFT JOIN cart ON product.id_product = cart.id_product AND cart.id_client = 1
-                LEFT JOIN favourites ON product.id_product = favourites.id_product AND favourites.id_client = 1
+                LEFT JOIN cart ON product.id_product = cart.id_product AND cart.id_client = :userId
+                LEFT JOIN favourites ON product.id_product = favourites.id_product AND favourites.id_client = :userId
                 ORDER BY product.id_product;');
             $command->bindParam(':userId', $userId);
             $command->execute();

@@ -12,7 +12,6 @@
     session_start();
     if(!isset($_COOKIE['id_session'])){
         $_SESSION['id_session'] = uniqid();
-        setcookie('id_session', $_SESSION['id_session'], 0, '/');
         $clientInit = new ClientModel();
         $clientInit->initClientSession($_COOKIE['id_session']);
         $_SESSION['id_client'] = $clientInit->getClientId($_SESSION['id_session']);
@@ -20,7 +19,14 @@
         $_SESSION['id_session'] = $_COOKIE['id_session'];
         $clientInit = new ClientModel();
         $_SESSION['id_client'] = $clientInit->getClientId($_SESSION['id_session']);
+        if(!$_SESSION['id_client']){
+            $_SESSION['id_session'] = uniqid();
+            $clientInit->initClientSession($_SESSION['id_session']);
+            $_SESSION['id_client'] = $clientInit->getClientId($_SESSION['id_session']);
+        }
     }
+
+    setcookie('id_session', $_SESSION['id_session'], 0, '/');
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $controller = new PostController();

@@ -15,6 +15,7 @@ class MainController{
 
     public function Action(){
         $clientId = $_SESSION['id_client'];
+        var_dump($clientId);
         $products = $this->productModel->getAllProducts($clientId);
         $view = './view/main.php';
         $data = array(
