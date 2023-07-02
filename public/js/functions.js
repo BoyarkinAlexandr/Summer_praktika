@@ -40,6 +40,39 @@ function refreshContainerFavor(container, arrayInfo){
     })
 }
 
+function refreshContainerCart(container, arrayInfo){
+    container.empty();
+    arrayInfo.forEach(infoBlock => {
+        if(infoBlock['count_product']){
+            let totalHTML = 
+            `<div class="cart__products">
+                <div data-id-product="${ infoBlock['id_product']}" class="cart__products__favourites ${ !infoBlock['is_favourites'] ? '' : 'active'}">
+                    <img src="/public/css/pictures/love.svg" class="cart__products__love" alt="">
+                    <img src="/public/css/pictures/love-fill.svg" class="cart__products__love-fill" alt="">
+                </div>
+                <div class="cart__products__wrapper">
+                    <div class="cart__products__icon">
+                        <img src="${infoBlock['img_product']}" alt="">
+                    </div>
+                    <div class="cart__products__name">
+                        <h2><${infoBlock['name_product']}</h2>
+                    </div>
+                    <div class="cart__products__count">
+                        <div class="cart__products__count__min">-</div>
+                        <div class="cart__products__count__num"><input type="number" data-id-product="${infoBlock['id_product']}" value="${infoBlock['count_product']}" max="99" min="1"></div>
+                        <div class="cart__products__count__plus">+</div>
+                    </div>
+                    <div class="cart__products__price">
+                        <span class="cart__products__price__text">${ infoBlock['count_product'] * infoBlock['price_product']}</span>&#8381;
+                    </div>
+                </div>
+            </div>`;
+            // addToCart([btnAddToCart], '.product-links > div');
+            container.append(totalHTML);
+        }
+    })
+}
+
 function addToCart(blocks, selectorBlocks){
     console.log(selectorBlocks + `[data-id-product=${$(this).data('id-product')}]`);
     blocks.forEach(block => {
@@ -57,9 +90,10 @@ function addToCart(blocks, selectorBlocks){
             newAjaxQuery('index.php',data, 'POST')
                 .then(function(responce){
                     responce = $.parseJSON(responce);
-                    thisBtn.text(responce.count_product);
+                    thisBtn.text(thisValue);
                     $(`.product-links > div[data-id-product=${thisBtn.data('id-product')}]`).text(responce.count_product);
                     $(`.cart__products__count__num > input[data-id-product=${thisBtn.data('id-product')}]`).val(responce.count_product);
+                    refreshContainerCart($('.cart__products__container'),responce);
                 })
                 .catch(function(xhr, status, error){
                     console.log(xhr);

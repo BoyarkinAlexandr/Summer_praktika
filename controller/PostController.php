@@ -38,13 +38,15 @@
                         }
                         case 'add_cart': {
                             $userId = $_SESSION['id_client'];
-                            $object = $this->cartModel->initToCartProduct($userId, $POSTarray['id_product'], $POSTarray['count_product']);
+                            $this->cartModel->initToCartProduct($userId, $POSTarray['id_product'], $POSTarray['count_product']);
+                            $object = $this->productModel->getAllProducts($userId);
                             return json_encode($object);
                             exit();
                         }
                         case 'update_cart':{
                             $userId = $_SESSION['id_client'];
-                            $object = $this->cartModel->updateToCartProduct($userId, $POSTarray['id_product'], $POSTarray['count_product']);
+                            $this->cartModel->updateToCartProduct($userId, $POSTarray['id_product'], $POSTarray['count_product']);
+                            $object = $this->productModel->getAllProducts($userId);
                             return json_encode($object);
                             exit();
                         }
