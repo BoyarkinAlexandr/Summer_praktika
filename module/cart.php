@@ -68,5 +68,18 @@
             } 
             return false;
         }
+
+        public function deleteProductById($idUser, $idProduct){
+            $command = $this->db->prepare('
+                DELETE FROM cart
+                WHERE id_client = :idUser AND id_product=:idProduct
+            ');
+            $command->bindParam(':idUser', $idUser);
+            $command->bindParam(':idProduct', $idProduct);
+            if($command->execute()){
+                return true;
+            } 
+            return false;
+        }
     }
 ?>

@@ -58,6 +58,14 @@
                             return json_encode($object);
                             exit();
                         }
+
+                        case 'delete_by_id':{
+                            $userId = $_SESSION['id_client'];
+                            $this->cartModel->deleteProductById($userId, $POSTarray['id_product']);
+                            $object = $this->productModel->getAllProducts($userId);
+                            return json_encode($object);
+                            exit();
+                        }
                     }
                 }
             }

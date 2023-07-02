@@ -1,4 +1,14 @@
 $(document).ready(() => {
+
+    $('.cart__products__delete');
+
+    zeroProductInCart($('.cart__products__container'));
+
+    returnAllPrice($('.cart__price__number > span'), $('.cart__products__price__text'));
+
+    deleteProductFromCartById(document.querySelectorAll('.cart__products__delete'));
+
+
     class AnimationOpenJQ{
         constructor(btn, block){
             this.block = block;
@@ -37,4 +47,26 @@ $(document).ready(() => {
                 addToCart(document.querySelectorAll('.product-links > div'),'.product-links > div');
             })
     });
+
+
+    $('.cart__products__count__num > input').on('change', function(){
+        console.log(1);
+    })
+
+    $('.cart__products__count__plus').on('click', function(){
+        let idProduct = $(this).data(`id-product`);
+        if($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val() < 99){
+            $(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val(Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val()) + 1);
+        }
+    })
+
+    $('.cart__products__count__min').on('click', function(){
+        let idProduct = $(this).data(`id-product`);
+        if($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val() > 1){
+            $(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val(Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val()) - 1);
+        }
+    })
+
+
+
 });

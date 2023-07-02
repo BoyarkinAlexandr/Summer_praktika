@@ -78,6 +78,7 @@ function refreshContainerFavor(container, arrayInfo){
         $('.product-links > div').off();
         addToCart(document.querySelectorAll('.product-links > div'), '.product-links > div');
     })
+    zeroProductInFavor(container);
 }
 
 function refreshContainerCart(container, arrayInfo){
@@ -105,11 +106,19 @@ function refreshContainerCart(container, arrayInfo){
                     <div class="cart__products__price">
                         <span class="cart__products__price__text">${ infoBlock['count_product'] * infoBlock['price_product']}</span>&#8381;
                     </div>
+                    <div class="cart__products__delete" data-id-product="${ infoBlock['id_product']}">
+                        x
+                    </div>
                 </div>
             </div>`;
             container.append(totalHTML);
         }
     })
+    $(`.cart__products__favourites`).off();
+    addToFavourites($(`.cart__products__favourites`));
+    zeroProductInCart(container);
+    returnAllPrice($('.cart__price__number > span'), $('.cart__products__price__text'));
+    deleteProductFromCartById(document.querySelectorAll('.cart__products__delete'));
 }
 
 function addToFavourites(block){
@@ -167,4 +176,59 @@ function refreshBtnIconFromDelete(btnBlocks){
         ShopBtn.setAttribute('data-id-product', $(btnBlocks[i]).data('id-product')); 
         btnBlocks[i].outerHTML = ShopBtn.outerHTML;
     }
+}
+
+function zeroProductInCart(container){
+    if (container.children().length === 0){
+        $('.cart__price').hide();
+        $('.cart__btn__container').hide();
+        $('.cart__wrapper').append('<div class="cart__title__text__nothing">Пока здесь ничего нет!</div>');
+    } else {
+        $('.cart__price').show();
+        $('.cart__btn__container').show();
+        $('.cart__title__text__nothing').remove();
+    }
+
+}
+
+function zeroProductInFavor(container){
+    if (container.children().length === 0){
+        $('.favorietes__wrapper').append('<div class="favorietes__title__text__nothing">Пока здесь ничего нет!</div>');
+    } else {
+        $('.favorietes__title__text__nothing').remove();
+    }
+}
+
+function returnAllPrice(container, blocks){
+    let totalPrice = 0;
+    for(let i = 0; i < blocks.length; i++){
+        totalPrice += Number($(blocks[i]).text());
+    }
+    container.text(totalPrice);
+}
+
+function deleteProductFromCartById(blocks){
+    blocks.forEach(block => {
+        $(block).on('click', function(){
+            let data = {
+                'action': 'delete_by_id',
+                'id_product': $(block).data('id-product')
+            }
+            let thisBtn = $(this);
+            newAjaxQuery('index.php',data, 'POST')
+                .then(function(responce){
+                    responce = $.parseJSON(responce);
+                    let ShopBtn = document.createElement('div');
+                    ShopBtn.insertAdjacentHTML('beforeend','<ion-icon name="bag-outline" data-id-product="" role="img" class="md hydrated"></ion-icon>');
+                    ShopBtn.setAttribute('data-id-product', thisBtn.data('id-product')); 
+                    document.querySelectorAll(`.product-links > div[data-id-product="${thisBtn.data('id-product')}"]`).forEach(block =>{
+                        block.outerHTML = ShopBtn.outerHTML;
+                    })
+                    refreshContainerCart($('.cart__products__container'),responce);
+                })
+                .catch(function(xhr, status, error){
+                    console.log(xhr);
+                })
+        });
+    })
 }

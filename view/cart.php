@@ -23,12 +23,15 @@
                                 <h2><?= $product['name_product']?></h2>
                             </div>
                             <div class="cart__products__count">
-                                <div class="cart__products__count__min">-</div>
+                                <div class="cart__products__count__min" data-id-product="<?= $product['id_product']?>">-</div>
                                 <div class="cart__products__count__num"><input type="number" data-id-product="<?= $product['id_product']?>" value="<?= $product['count_product']?>" max="99" min="1"></div>
-                                <div class="cart__products__count__plus">+</div>
+                                <div class="cart__products__count__plus" data-id-product="<?= $product['id_product']?>">+</div>
                             </div>
                             <div class="cart__products__price">
                                 <span class="cart__products__price__text"><?= $product['count_product'] * $product['price_product']?></span>&#8381;
+                            </div>
+                            <div class="cart__products__delete" data-id-product="<?= $product['id_product']?>">
+                                x
                             </div>
                         </div>
                     </div>
