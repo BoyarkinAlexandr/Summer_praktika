@@ -24,5 +24,5 @@ $(document).ready(() => {
     new AnimationOpenJQ($('#cart-icon-card'),$('.cart__container'));
     new AnimationOpenJQ($('#cart-icon-favorietes'),$('.favorietes__container'));
 
-    addToCart(document.querySelectorAll('.product-links > div'));
+    addToCart(document.querySelectorAll('.product-links > div'),'.product-links > div');
 });

@@ -37,7 +37,7 @@
             <div class="product-row">
                 <?php foreach(array_slice($products, 0, 3) as $product):?>
                 <div class="product-card">
-                    <div class="badge <?php echo $product['favourites'] == '' ? '' : 'active'?>" data-id-product="<?php echo $product['id_product']?>">
+                    <div data-id-product="<?= $product['id_product'] ?>" class="badge <?php echo $product['is_favourites'] == '' ? '' : 'active'?>" data-id-product="<?php echo $product['id_product']?>">
                         <img src="/public/css/pictures/favorietes.svg" class="like" alt="Нажми меня">
                         <img src="/public/css/pictures/success.svg" class="success" alt="Нажми меня">
                     </div>
@@ -53,7 +53,8 @@
                             </div>
 
                             <div class="product-links" >
-                                <div href=""><ion-icon name="bag-outline" data-id-product="<?php $product['id_product']?>"></ion-icon></div>
+                                <?php echo !isset($product['count_product']) ? '<div href="" data-id-product="' . $product['id_product'] . '"><ion-icon name="bag-outline" data-id-product="' . $product['id_product'] . '"></ion-icon></div>' 
+                                : '<div href="" data-id-product="' . $product['id_product'] . '" style="padding: 8px 19px; font-size: 20px; color: #f3f7f2; font-family:Better Together Caps">' . $product['count_product'] . '</div>' ?>
                             </div>
                         </div>
                     </div>
@@ -62,6 +63,6 @@
                     array_shift($products);
                     endforeach;?>
             </div>
-        <?php endwhile;?>
+            <?php endwhile;?>
         </div>
     </section>

@@ -4,12 +4,14 @@
         protected $favoritModel;
         protected $clientModel;
         protected $cartModel;
+        protected $productModel;
 
         public function __construct()
         {
             $this->favoritModel = new FavouritesModel();
             $this->clientModel = new ClientModel();
             $this->cartModel = new CartModel();
+            $this->productModel = new ProductModel();
         }
 
         public function handleRequest($POSTarray){
@@ -17,19 +19,19 @@
                 if(isset($POSTarray['action'])){
                     switch($POSTarray['action']){
                         case 'add_favourites':{
-                            $userId = $this->clientModel->getClientId($_SESSION['id_session']);
+                            $userId = $_SESSION['id_client'];
                             $object = array(
                                 'result_query' => $this->favoritModel->addToFavorietes($userId ,$POSTarray['id_product']),
-                                'objects_products' => $this->favoritModel->getFavofProducts($userId),
+                                'objects_products' => $this->productModel->getAllProducts($userId),
                             );
                             return json_encode($object);
                             exit();
                         }
                         case 'delete_favourites':{
-                            $userId = $this->clientModel->getClientId($_SESSION['id_session']);
+                            $userId = $_SESSION['id_client'];
                             $object = array(
                                 'result_query' => $this->favoritModel->deleteToFavorietes($userId ,$POSTarray['id_product']),
-                                'objects_products' => $this->favoritModel->getFavofProducts($userId),
+                                'objects_products' => $this->productModel->getAllProducts($userId),
                             );
                             return json_encode($object);
                             exit();

@@ -17,12 +17,8 @@ class MainController{
         $clientId = $_SESSION['id_client'];
         $products = $this->productModel->getAllProducts($clientId);
         $view = './view/main.php';
-        $favoruetesProducts = $this->favoruetesModel->getAllFavourites($clientId);
-        $products = $this->productModel->getInitParamFavorietes($products, $favoruetesProducts);
-        $listFavorProducts = $this->favoruetesModel->getFavofProducts($clientId);
         $data = array(
             'products' => $products,
-            'favorProducts' => $listFavorProducts,
         );
         $this->html->render($data, $view);
     }
