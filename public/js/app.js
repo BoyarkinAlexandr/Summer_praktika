@@ -1,4 +1,4 @@
-$(document).ready(() => {try{
+$(document).ready(() => {
     let slider = document.querySelector('.slider .list');
     let items = document.querySelectorAll('.slider .list .item');
     let next = document.getElementById('next');
@@ -38,7 +38,6 @@ $(document).ready(() => {try{
     window.onresize = function(event) {
         reloadSlider();
     };
-} catch{}
 
     // ____________________Кнопка________________-
 

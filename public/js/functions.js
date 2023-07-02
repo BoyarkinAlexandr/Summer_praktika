@@ -40,7 +40,25 @@ function refreshContainerFavor(container, arrayInfo){
 function addToCart(blocks){
     blocks.forEach(block => {
         $(block).on('click', function(){
-
+            let thisBtn = $(this);
+            thisBtn.css({'padding': '8px 19px', 'font-size': '20px', 'color': '#f3f7f2', 'font-family':'Better Together Caps'});
+            let thisValue = thisBtn.text() ?  Number(thisBtn.text()) + 1 : 1;
+            let action = thisValue === 1 ? `add_cart` : `update_cart`;
+            console.log(action);
+            let data = {
+                'action': action,
+                'id_product': $(block).data('id-product'),
+                'count_product': thisValue,
+            }
+            newAjaxQuery('index.php',data, 'POST')
+                .then(function(responce){
+                    console.log(responce);
+                    responce = $.parseJSON(responce);
+                    thisBtn.text(responce.count_product);
+                })
+                .catch(function(xhr, status, error){
+                    console.log(xhr);
+                })
         });
     });
 }

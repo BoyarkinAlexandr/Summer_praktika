@@ -14,9 +14,9 @@ class MainController{
     }
 
     public function Action(){
-        $products = $this->productModel->getAllProducts();
+        $clientId = $_SESSION['id_client'];
+        $products = $this->productModel->getAllProducts($clientId);
         $view = './view/main.php';
-        $clientId = $this->clientModele->getClientId($_SESSION['id_session']);
         $favoruetesProducts = $this->favoruetesModel->getAllFavourites($clientId);
         $products = $this->productModel->getInitParamFavorietes($products, $favoruetesProducts);
         $listFavorProducts = $this->favoruetesModel->getFavofProducts($clientId);

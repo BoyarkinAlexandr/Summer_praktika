@@ -1,5 +1,5 @@
 <?php
-class MenuController extends Model{
+class MenuController{
     protected $productModel;
     protected $html;
     protected $clientModele;
@@ -14,13 +14,15 @@ class MenuController extends Model{
     }
 
     public function Action(){
-        $products = $this->productModel->getAllProducts();
+        $clientId = $_SESSION['id_client'];
+        $products = $this->productModel->getAllProducts($clientId);
         $view = './view/menu.php';
-        $clientId = $this->clientModele->getClientId($_SESSION['id_session']);
         $favoruetesProducts = $this->favoruetesModel->getAllFavourites($clientId);
         $products = $this->productModel->getInitParamFavorietes($products, $favoruetesProducts);
+        $listFavorProducts = $this->favoruetesModel->getFavofProducts($clientId);
         $data = array(
             'products' => $products,
+            'favorProducts' => $listFavorProducts,
         );
         $this->html->render($data, $view);
     }

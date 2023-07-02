@@ -82,7 +82,8 @@
                             </div>
 
                             <div class="product-links" >
-                                <div href=""><ion-icon name="bag-outline" data-id-product="<?php $product['id_product']?>"></ion-icon></div>
+                                <?php echo !isset($product['count_product']) ? '<div href="" data-id-product="' . $product['id_product'] . '"><ion-icon name="bag-outline" data-id-product="' . $product['id_product'] . '"></ion-icon></div>' 
+                                : '<div href="" data-id-product="' . $product['id_product'] . '" style="padding: 8px 19px; font-size: 20px; color: #f3f7f2; font-family:Better Together Caps">' . $product['count_product'] . '</div>' ?>
                             </div>
                         </div>
                     </div>

@@ -1,7 +1,7 @@
 <nav>
     <div class="container-fluid">
         <div class="logo-search-container">
-            <p class="logo__title">Fragrante</p>
+            <a href="/main" class="logo__title">Fragrante</a>
             <div class="search-bar">
             <input type="search" placeholder="ПОИСК">
             </div>

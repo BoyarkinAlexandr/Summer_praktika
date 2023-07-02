@@ -29,12 +29,19 @@ body{
 /* Начало navbar */
 
 .logo__title {
-    font-family: 'Better Together Caps';
-    font-style: normal;
-    font-size: 65px;
-    line-height: 65px;
-    color: #FFFFFF;
-    float: left;
+  font-family: 'Better Together Caps';
+  font-style: normal;
+  font-size: 65px;
+  line-height: 65px;
+  color: #FFFFFF;
+  float: left;
+  text-decoration: none;
+  transition-property: color;
+  transition-duration: .3s;
+}
+
+.logo__title:hover{
+  color:#FEF3C7;
 }
 
 nav .logo-search-container {
@@ -609,7 +616,7 @@ color: #251813;
     font-size: 25px;
     text-align: center;
     border-radius: 50%;
-    border: 10px solid #F97316;
+    padding: 10px;
     cursor: pointer;
     background-color: #F97316; /* добавляем оранжевый цвет внутренней области рамки */
 }
@@ -1077,6 +1084,7 @@ color: #251813;
 }
 
 .cart__wrapper{
+  top: 105px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -1587,6 +1595,7 @@ footer a {
 }
 
 .favorietes__wrapper{
+  top: 105px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;

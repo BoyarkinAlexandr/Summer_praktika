@@ -6,11 +6,15 @@
            parent::__construct();
         }
 
-        public function getAllProducts(){
-            try {
-                $query = $this->db->query("SELECT * FROM product");
-                return $query->fetchAll(PDO::FETCH_ASSOC);
-            } catch (PDOException $e) {echo $e->getMessage();}
+        public function getAllProducts($userId){
+            $command = $this->db->prepare('
+                SELECT COALESCE(cart.count_product, NULL) AS count_product, product.*
+                FROM product
+                LEFT JOIN cart ON product.id_product = cart.id_product AND cart.id_client = :userId
+                ORDER BY product.id_product;');
+            $command->bindParam(':userId', $userId);
+            $command->execute();
+            return $command->fetchAll(PDO::FETCH_ASSOC);
         }
         
         public function getProductsWithLimit($limit){
@@ -41,7 +45,7 @@
                 return (int)$query->fetchAll(PDO::FETCH_BOTH)[0][0];
             } catch (PDOException $e) {echo $e->getMessage();}
         }
-        
+
         public function getInitParamFavorietes($products, $favorietesProducts){
             if (!empty($favorietesProducts)) {
                 foreach ($products as &$product) {
