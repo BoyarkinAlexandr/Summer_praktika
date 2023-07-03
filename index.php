@@ -13,7 +13,7 @@
     if(!isset($_COOKIE['id_session'])){
         $_SESSION['id_session'] = uniqid();
         $clientInit = new ClientModel();
-        $clientInit->initClientSession($_COOKIE['id_session']);
+        $clientInit->initClientSession($_SESSION['id_session']);
         $_SESSION['id_client'] = $clientInit->getClientId($_SESSION['id_session']);
     } else{
         $_SESSION['id_session'] = $_COOKIE['id_session'];

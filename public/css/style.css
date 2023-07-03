@@ -1264,6 +1264,7 @@ color: #251813;
 
 .cart__products__count__num > input{
   width: min-content;
+  margin-right: 15px;
 }
 
 .cart__products__price__text{

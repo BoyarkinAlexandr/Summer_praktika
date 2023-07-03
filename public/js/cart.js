@@ -47,26 +47,65 @@ $(document).ready(() => {
                 addToCart(document.querySelectorAll('.product-links > div'),'.product-links > div');
             })
     });
+    setCounter();
 
 
-    $('.cart__products__count__num > input').on('change', function(){
-        console.log(1);
-    })
+    function setCounter(){
 
-    $('.cart__products__count__plus').on('click', function(){
-        let idProduct = $(this).data(`id-product`);
-        if($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val() < 99){
-            $(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val(Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val()) + 1);
-        }
-    })
-
-    $('.cart__products__count__min').on('click', function(){
-        let idProduct = $(this).data(`id-product`);
-        if($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val() > 1){
-            $(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val(Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val()) - 1);
-        }
-    })
-
-
-
+        $('.cart__products__count__plus').on('click', function(){
+            let idProduct = $(this).data(`id-product`);
+            if($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val() < 99){
+                let thisProdPrice = Number($(`.cart__products__price__text[data-id-product=${idProduct}]`).text())/Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val());
+                $(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val(Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val()) + 1);
+                let thisValue = Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val());
+                let action = `update_cart`;
+                let data = {
+                    'action': action,
+                    'id_product': idProduct,
+                    'count_product': thisValue,
+                }
+                newAjaxQuery('index.php',data, 'POST')
+                    .then(function(responce){
+                        responce = $.parseJSON(responce);
+                        $(`.cart__products__price__text[data-id-product=${idProduct}]`).text(thisProdPrice * Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val()));
+                    })
+                    .catch(function(xhr, status, error){
+                        console.log(xhr);
+                    })
+                let totalPrice = 0;
+                document.querySelectorAll('.cart__products__price__text').forEach(block => {
+                    totalPrice += Number($(block).text());
+                })
+                $('.cart__price__number > span').text(totalPrice);
+            }
+        })
+    
+        $('.cart__products__count__min').on('click', function(){
+            let idProduct = $(this).data(`id-product`);
+            if($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val() > 1){
+                let thisProdPrice = Number($(`.cart__products__price__text[data-id-product=${idProduct}]`).text())/Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val());
+                $(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val(Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val()) - 1);
+                let thisValue = Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val());
+                let action = `update_cart`;
+                let data = {
+                    'action': action,
+                    'id_product': idProduct,
+                    'count_product': thisValue,
+                }
+                newAjaxQuery('index.php',data, 'POST')
+                    .then(function(responce){
+                        responce = $.parseJSON(responce);
+                        $(`.cart__products__price__text[data-id-product=${idProduct}]`).text(thisProdPrice * Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val()));
+                    })
+                    .catch(function(xhr, status, error){
+                        console.log(xhr);
+                    })
+                let totalPrice = 0;
+                document.querySelectorAll('.cart__products__price__text').forEach(block => {
+                    totalPrice += Number($(block).text());
+                })
+                $('.cart__price__number > span').text(totalPrice);
+            }   
+        });
+    }
 });
