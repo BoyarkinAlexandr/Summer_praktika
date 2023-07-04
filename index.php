@@ -8,7 +8,6 @@
     include_once('./connections/controllers.php');
     include_once('./connections/view.php');
 
-
     session_start();
     if(!isset($_COOKIE['id_session'])){
         $_SESSION['id_session'] = uniqid();

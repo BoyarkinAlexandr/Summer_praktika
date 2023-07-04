@@ -96,17 +96,17 @@ function refreshContainerCart(container, arrayInfo){
                         <img src="${infoBlock['img_product']}" alt="">
                     </div>
                     <div class="cart__products__name">
-                        <h2><${infoBlock['name_product']}</h2>
+                        <h2>${infoBlock['name_product']}</h2>
                     </div>
                     <div class="cart__products__count">
-                        <div class="cart__products__count__min">-</div>
+                        <div class="cart__products__count__min" data-id-product="${infoBlock['id_product']}">-</div>
                         <div class="cart__products__count__num"><input type="number" data-id-product="${infoBlock['id_product']}" value="${infoBlock['count_product']}" disabled max="99" min="1"></div>
-                        <div class="cart__products__count__plus">+</div>
+                        <div class="cart__products__count__plus" data-id-product="${infoBlock['id_product']}">+</div>
                     </div>
                     <div class="cart__products__price">
-                        <span class="cart__products__price__text">${ infoBlock['count_product'] * infoBlock['price_product']}</span>&#8381;
+                        <span class="cart__products__price__text" data-id-product="${infoBlock['id_product']}"> ${infoBlock['count_product'] * infoBlock['price_product']}</span>&#8381;
                     </div>
-                    <div class="cart__products__delete" data-id-product="${ infoBlock['id_product']}">
+                    <div class="cart__products__delete" data-id-product="${infoBlock['id_product']}">
                         x
                     </div>
                 </div>
@@ -119,7 +119,66 @@ function refreshContainerCart(container, arrayInfo){
     zeroProductInCart(container);
     returnAllPrice($('.cart__price__number > span'), $('.cart__products__price__text'));
     deleteProductFromCartById(document.querySelectorAll('.cart__products__delete'));
-    setCounter();
+
+
+    $('.cart__products__count__plus').off();
+    $('.cart__products__count__min').off();
+    $('.cart__products__count__plus').on('click', function(){
+        let idProduct = $(this).data(`id-product`);
+        if($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val() < 99){
+            let thisProdPrice = Number($(`.cart__products__price__text[data-id-product=${idProduct}]`).text())/Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val());
+            $(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val(Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val()) + 1);
+            let thisValue = Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val());
+            let action = `update_cart`;
+            let data = {
+                'action': action,
+                'id_product': idProduct,
+                'count_product': thisValue,
+            }
+            newAjaxQuery('index.php',data, 'POST')
+                .then(function(responce){
+                    responce = $.parseJSON(responce);
+                    $(`.cart__products__price__text[data-id-product=${idProduct}]`).text(thisProdPrice * Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val()));
+                    let totalPrice = 0;
+                    document.querySelectorAll('.cart__products__price__text').forEach(block => {
+                        totalPrice += Number($(block).text());
+                    })
+                    $('.cart__price__number > span').text(totalPrice);
+                })
+                .catch(function(xhr, status, error){
+                    console.log(xhr);
+                })
+        }
+    })
+
+    $('.cart__products__count__min').on('click', function(){
+        let idProduct = $(this).data(`id-product`);
+        if($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val() > 1){
+            let thisProdPrice = Number($(`.cart__products__price__text[data-id-product=${idProduct}]`).text())/Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val());
+            $(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val(Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val()) - 1);
+            let thisValue = Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val());
+            let action = `update_cart`;
+            let data = {
+                'action': action,
+                'id_product': idProduct,
+                'count_product': thisValue,
+            }
+            newAjaxQuery('index.php',data, 'POST')
+                .then(function(responce){
+                    responce = $.parseJSON(responce);
+                    $(`.cart__products__price__text[data-id-product=${idProduct}]`).text(thisProdPrice * Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val()));
+                    let totalPrice = 0;
+                    document.querySelectorAll('.cart__products__price__text').forEach(block => {
+                        totalPrice += Number($(block).text());
+                    })
+                    console.log(totalPrice);
+                    $('.cart__price__number > span').text(totalPrice);
+                })
+                .catch(function(xhr, status, error){
+                    console.log(xhr);
+                });
+        }
+    });
 }
 
 function addToFavourites(block){
@@ -226,69 +285,12 @@ function deleteProductFromCartById(blocks){
                         block.outerHTML = ShopBtn.outerHTML;
                     })
                     refreshContainerCart($('.cart__products__container'),responce);
+                    $('.product-links > div').off();
+                    addToCart(document.querySelectorAll('.product-links > div'),'.product-links > div');
                 })
                 .catch(function(xhr, status, error){
                     console.log(xhr);
                 })
         });
     })
-}
-
-function setCounter(){
-
-    $('.cart__products__count__plus').on('click', function(){
-        let idProduct = $(this).data(`id-product`);
-        if($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val() < 99){
-            let thisProdPrice = Number($(`.cart__products__price__text[data-id-product=${idProduct}]`).text())/Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val());
-            $(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val(Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val()) + 1);
-            let thisValue = Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val());
-            let action = `update_cart`;
-            let data = {
-                'action': action,
-                'id_product': idProduct,
-                'count_product': thisValue,
-            }
-            newAjaxQuery('index.php',data, 'POST')
-                .then(function(responce){
-                    responce = $.parseJSON(responce);
-                    $(`.cart__products__price__text[data-id-product=${idProduct}]`).text(thisProdPrice * Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val()));
-                })
-                .catch(function(xhr, status, error){
-                    console.log(xhr);
-                })
-            let totalPrice = 0;
-            document.querySelectorAll('.cart__products__price__text').forEach(block => {
-                totalPrice += Number($(block).text());
-            })
-            $('.cart__price__number > span').text(totalPrice);
-        }
-    })
-
-    $('.cart__products__count__min').on('click', function(){
-        let idProduct = $(this).data(`id-product`);
-        if($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val() > 1){
-            let thisProdPrice = Number($(`.cart__products__price__text[data-id-product=${idProduct}]`).text())/Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val());
-            $(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val(Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val()) - 1);
-            let thisValue = Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val());
-            let action = `update_cart`;
-            let data = {
-                'action': action,
-                'id_product': idProduct,
-                'count_product': thisValue,
-            }
-            newAjaxQuery('index.php',data, 'POST')
-                .then(function(responce){
-                    responce = $.parseJSON(responce);
-                    $(`.cart__products__price__text[data-id-product=${idProduct}]`).text(thisProdPrice * Number($(`.cart__products__count__num > input[data-id-product=${idProduct}]`).val()));
-                })
-                .catch(function(xhr, status, error){
-                    console.log(xhr);
-                });
-            let totalPrice = 0;
-            document.querySelectorAll('.cart__products__price__text').forEach(block => {
-                totalPrice += Number($(block).text());
-            })
-            $('.cart__price__number > span').text(totalPrice);
-        }
-    });
 }

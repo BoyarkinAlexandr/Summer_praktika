@@ -1,5 +1,36 @@
 $(document).ready(() => {
 
+    $('.cart__buy__btn').on('click', function(){
+        let array = [];
+        document.querySelectorAll('.cart__products').forEach(block => {
+            let obj = {};
+            obj['id_product'] = $(block).find('.cart__products__favourites').data('id-product');
+            obj['count_product'] = $(block).find('.cart__products__count__num').find('input').val();
+            array.push(obj);
+        })
+        data = {
+            'action': 'add_history',
+            'array': array
+        };
+        console.log(data);
+        newAjaxQuery('index.php',data, 'POST')
+            .then(function(responce){
+                console.log(responce);
+                let data = {'action': 'delete_all'};
+                newAjaxQuery('index.php', data, 'POST')
+                    .then(function(responce){
+                        responce = $.parseJSON(responce);
+                        refreshContainerCart($('.cart__products__container'),responce);
+                        refreshContainerFavor($('.favorietes__products__container'), responce);
+                        refreshBtnIconFromDelete($('.product-links > div'));
+                        addToCart(document.querySelectorAll('.product-links > div'),'.product-links > div');
+                    })
+            })
+            .catch(function(xhr, status, error){
+                console.log(xhr);
+            })
+    });
+
     $('.cart__products__delete');
 
     zeroProductInCart($('.cart__products__container'));

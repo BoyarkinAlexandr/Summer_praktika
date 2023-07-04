@@ -81,5 +81,24 @@
             } 
             return false;
         }
+
+        public function initAtHistoryBuy($idUser, $idProduct, $countProduct){
+            $command = $this->db->prepare('
+                INSERT INTO 
+                buy_history(id_client, id_product, count_product,date_buy)
+                VALUES(:idUser, :idProduct, :countProduct, :dateBuy)
+            ');
+            $date = date('d.m.Y');
+            $command->bindParam(':idUser', $idUser);
+            $command->bindParam(':idProduct', $idProduct);
+            $command->bindParam(':countProduct', $countProduct);
+            $command->bindParam(':dateBuy', $date);
+            var_dump($command->execute());
+            exit();
+            if($command->execute()){
+                return true;
+            } 
+            return false;
+        }
     }
 ?>

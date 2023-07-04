@@ -66,6 +66,37 @@
                             return json_encode($object);
                             exit();
                         }
+                        case 'add_history':{
+                            $userId = $_SESSION['id_client'];
+                            foreach($POSTarray['array'] as $block){
+                                if($block['id_product'] && $block['count_product']){
+                                    $this->cartModel->initAtHistoryBuy($userId,$block['id_product'], $block['count_product']);
+                                }
+                            };
+                            $object = array(
+                                'result' => 'true',
+                            );
+                            return json_encode($object);
+                            exit();
+                        }
+                        case 'add_login':{
+                            $userId = $_SESSION['id_client'];
+                            $this->clientModel->addLoginAndPassword($userId, $POSTarray['login'], $POSTarray['password']);
+                            $object = array(
+                                'result' => 'true',
+                            );
+                            return json_encode($object);
+                            exit();
+                        }
+                        case 'enter_at_cab':{
+                            $result = $this->clientModel->enterAtCab( $POSTarray['login'], $POSTarray['password']);
+                            $object = array(
+                                'result' => $result,
+                            );
+                            setcookie('enter', true,  0, '/');
+                            return json_encode($object);
+                            exit();
+                        }
                     }
                 }
             }

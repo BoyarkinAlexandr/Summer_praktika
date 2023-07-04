@@ -28,7 +28,7 @@
         </div>
     </div>
 </nav>
-
+    <?php if  (!isset($_COOKIE['enter'])):?>
     <!-- Меню авторизации -->
     <div id="modal-container" class="modal">
         <div class="modal-content1">
@@ -36,21 +36,20 @@
             <div class="container" id="container">
                 <span class="close">×</span>
                 <div class="form-container sign-up-container">
-                    <form action="#">
+                    <form action="">
                         <h1 class="modal__window__title">Создать аккаунт</h1>
-                        <input type="text" placeholder="Name" class="modal__window__input">
                         <input type="email" placeholder="Email" class="modal__window__input">
                         <input type="password" placeholder="Password" class="modal__window__input">
-                        <button class="modal__window__btn">Зарегистрироваться</button>
+                        <button class="modal__window__btn modal__window__reg">Зарегистрироваться</button>
                     </form>
                 </div>
                 <div class="form-container sign-in-container">
-                    <form action="#">
+                    <form action="">
                         <h1 class="modal__window__title">Войти</h1>
                         <input type="email" placeholder="Email" class="modal__window__input">
                         <input type="password" placeholder="Password" class="modal__window__input">
                         <a href="#" class="modal__window__link">Забыли свой пароль?</a>
-                        <button class="modal__window__btn">Войти</button>
+                        <button class="modal__window__btn modal__window__log">Войти</button>
                     </form>
                 </div>
                 <div class="overlay-container">
@@ -69,5 +68,6 @@
                 </div>
             </div>
         </div>
+        <?php endif;?>
     </div>
     <!-- Меню авторизации -->

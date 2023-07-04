@@ -5,14 +5,33 @@
             parent::__construct();
         }
 
-        public function initClient($idSession, $loginClient, $passwordClient){
+        public function enterAtCab($loginClient, $passwordClient){
             if (isset($loginClient) && isset($passwordClient)){
-                $command = $this->db->prepare('
+                $command = $this->db->prepare("
+                    SELECT *
+                    FROM clients
+                    WHERE login_client=:login AND password_client=:password
+                ");
+                $command->bindParam(':login', $loginClient);
+                $command->bindParam(':password', $passwordClient);
+
+                if ($command->execute()){
+                    return true;
+                } else {
+                    return false;
+                }
+            }
+            return false;
+        }
+
+        public function addLoginAndPassword($idClient, $loginClient, $passwordClient){
+            if (isset($loginClient) && isset($passwordClient)){
+                $command = $this->db->prepare("
                     UPDATE clients
                     SET login_client=:login, password_client=:password
-                    WHERE id_session=:sessionID
-                ');
-                $command->bindParam(':sessionID', $idSession);
+                    WHERE id_client=:idClient
+                ");
+                $command->bindParam(':idClient', $idClient);
                 $command->bindParam(':login', $loginClient);
                 $command->bindParam(':password', $passwordClient);
 
