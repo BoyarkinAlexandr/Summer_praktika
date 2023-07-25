@@ -30,6 +30,14 @@ section {
   padding: 0 1.5rem;
 }
 
+nav{
+    position: relative;
+}
+
+nav > .container-fluid > .button > .btn_log, nav > .container-fluid > .button > .btn_reg{
+    font-size: 1.5rem;
+}
+
 
 
 .accordion-item {
